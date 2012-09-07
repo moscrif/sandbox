@@ -1,0 +1,5 @@
+*.user
+link*.sh
+link*.bat
+*.msc
+output
