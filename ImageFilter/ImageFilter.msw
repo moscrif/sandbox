@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" vertBodyHeight="790" horzMiddleBodyHeight="200" vertOutputWidth="960" name="ImageFilter" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/oxy/Work/moscrif-sandbox/ImageFilter/ErodeImage.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_dvga.ini" selectedDevices="100">
+  <projects>
+    <project>./BlurImage.msp</project>
+    <project>./DilateImage.msp</project>
+    <project>./ErodeImage.msp</project>
+  </projects>
+  <opened>
+    <file>StartPage</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/ImageFilter/BlurImage/main.ms</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/ImageFilter/DilateImage/main.ms</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/ImageFilter/ErodeImage/main.ms</file>
+  </opened>
+</Workspace>

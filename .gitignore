@@ -3,3 +3,16 @@ link*.sh
 link*.bat
 *.msc
 output
+box2d
+core
+crypto
+game2d
+graphics
+media
+net
+sensor
+sql
+uix
+uix-skin
+ui
+skin

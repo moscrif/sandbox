@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" vertBodyHeight="790" horzMiddleBodyHeight="200" vertOutputWidth="960" name="PathEffect" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/oxy/Work/moscrif-sandbox/PathEffect/TextOutline.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_dvga.ini" selectedDevices="100">
+  <projects>
+    <project>./Path1dEffect.msp</project>
+    <project>./Path2dEffect.msp</project>
+    <project>./TextOutline.msp</project>
+    <project>./TextShadow.msp</project>
+  </projects>
+  <opened>
+    <file>StartPage</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/PathEffect/Path1dEffect/main.ms</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/PathEffect/Path2dEffect/main.ms</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/PathEffect/TextOutline/main.ms</file>
+    <file>/Users/oxy/Work/moscrif-sandbox/PathEffect/TextShadow/main.ms</file>
+  </opened>
+</Workspace>
