@@ -1,3 +1,5 @@
+.DS_Store
+
 *.user
 link*.sh
 link*.bat
@@ -16,3 +18,7 @@ uix
 uix-skin
 ui
 skin
+ads
+store
+*.ttf
+*.txt
