@@ -109,7 +109,7 @@ class MyGame : Game
             subclass_TextView.foreground = this._foregroundPaint;
             subclass_TextView.border = this._borderPaint;
 //          subclass_TextView.backgroundColor = 0x3F0000FF;
-            subclass_TextView.showTextView("Test.", this._textXxx_Return, this._textXxx_Change);
+            subclass_TextView.showTextView("Test.", this._textXxx_Return/*, this._textXxx_Change*/);
 //          logI("TextView.background", subclass_TextView.background);
         }
         this._textView.onDraw = function(sender, canvas) {
