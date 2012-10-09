@@ -51,7 +51,7 @@ class MyGame : Game
 
         this._foregroundPaint = new Paint();
         this._foregroundPaint.style = #fill;
-        this._foregroundPaint.color = 0xFF0000FF;
+        this._foregroundPaint.color = 0xFF00007F;
         this._foregroundPaint.typeface = Typeface.fromName("freesans");
         this._foregroundPaint.textSize = 16;
 
@@ -89,7 +89,7 @@ class MyGame : Game
             subclass_TextField_2.foreground = this._foregroundPaint;
             subclass_TextField_2.border = this._borderPaint;
 //          subclass_TextField_2.backgroundColor = 0x3F0000FF;
-            subclass_TextField_2.showTextField("Test.", this._textXxx_Return, this._textXxx_Change);
+            subclass_TextField_2.showTextField("Test.", this._textXxx_Return/*, this._textXxx_Change*/);
 //          logI("TextField_2.background", subclass_TextField_2.background);
         }
         this._textField_2.onDraw = function(sender, canvas) {
@@ -109,7 +109,7 @@ class MyGame : Game
             subclass_TextView.foreground = this._foregroundPaint;
             subclass_TextView.border = this._borderPaint;
 //          subclass_TextView.backgroundColor = 0x3F0000FF;
-            subclass_TextView.showTextView("Test.", this._textXxx_Return/*, this._textXxx_Change*/);
+            subclass_TextView.showTextView("Test.", this._textXxx_Return, this._textXxx_Change);
 //          logI("TextView.background", subclass_TextView.background);
         }
         this._textView.onDraw = function(sender, canvas) {
