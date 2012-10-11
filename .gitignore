@@ -22,3 +22,11 @@ ads
 store
 *.ttf
 *.txt
+
+GameCenter.app
+
+GameCenter.msp
+
+GameCenter/foto.jpg
+
+GameCenter/main.ms

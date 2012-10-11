@@ -9,7 +9,7 @@ include "code://uix/control/list/listItem.ms"
 
 var app = new Application();
 
-//var _facebook = new Facebook("", ["offline_access", "status_update", "read_stream", "publish_stream"]);
+var _facebook = new Facebook("", ["offline_access", "status_update", "read_stream", "publish_stream"]);
 
 app.onStart = function(sender)
 {
