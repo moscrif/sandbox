@@ -8,7 +8,6 @@ class MyGame : Game
     function start()
     {
         this._bg = Bitmap.fromFile("app://game_back.png");
-        this._sprite = new Sprite({image: "app://cloud_horny.png", x:System.width/2, y:System.height/8});
 
         var paint = new Paint();
         paint.color = 0xff0000ff;
