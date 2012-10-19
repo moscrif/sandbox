@@ -12,6 +12,7 @@ paint0.color = 0xff0000ff;
 
 var paint1 = new Paint();
 paint1.style = #stroke;
+paint1.strokeWidth = 1;
 paint1.textSize = 80;
 paint1.color = 0xff0000ff;
 

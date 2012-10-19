@@ -28,7 +28,7 @@ var paint4 = new Paint();
 paint4.style = #stroke;
 paint4.textSize = 80;
 paint4.color = 0xffffffff;
-paint4.looper = new BlurDrawLooper(1, -1, -1, 0xff000000);
+paint4.looper = new BlurDrawLooper(1, 1, 1, 0xff000000);
 
 var paint5 = new Paint();
 paint5.style = #stroke;
