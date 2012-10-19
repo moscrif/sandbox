@@ -53,7 +53,7 @@
       </publishProperties>
       <includes>
         <fonts>
-          <string>freemono-r.ttf</string>
+          <string>UbuntuMono-R.ttf</string>
         </fonts>
         <skin name="" theme="" />
       </includes>

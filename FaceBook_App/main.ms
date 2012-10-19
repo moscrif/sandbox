@@ -90,7 +90,7 @@ app.onStart = function(sender)
 //  form.add(new Button({text: "Logout", onClick: ::_facebook.logout()}));
 //  app.list.add(new ListItem({text: "Logout", onClick: ::_facebook.logout()}));
 
-        app._paint = new Paint();
+    app._paint = new Paint();
     app._paint.color = 0xFF000000;
     app._paint.textSize = 20;
     app.formResult = function(value)
@@ -101,7 +101,7 @@ app.onStart = function(sender)
             ;//logI("formRes");
         }
 
-                var toolsRes = new ToolBar({height: 100});
+        var toolsRes = new ToolBar({height: 100});
         formRes.add(toolsRes);
         toolsRes.add(new ToolBarButton({icon: #quit, text: "quit", onClick: function(sender) { app.pop(formRes); formRes.detach(); }}));
 
