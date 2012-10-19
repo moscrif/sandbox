@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)/output" facebookAppID="" projectArtefact="DeviceOrientation_$(Platform)_$(Resolution)" appFile="./DeviceOrientation.app">
+  <conditionDefines />
+  <NewSkin>true</NewSkin>
+  <fileProperties />
+  <devices>
+    <device targetPlatform="100">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="bundleIdentifier" value="com.generatedbymoscrifide.deviceorientation" />
+        <property name="alias" value="" />
+        <property name="keystore" value="" />
+        <property name="keypassword" value="" />
+        <property name="storepassword" value="" />
+        <property name="supportedDevices" value="universal" />
+        <property name="permission" value="" />
+      </publishProperties>
+      <includes>
+        <fonts>
+          <string>freesans-r.ttf</string>
+        </fonts>
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="150">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="bundleIdentifier" value="com.generatedbymoscrifide.deviceorientation" />
+        <property name="alias" value="" />
+        <property name="keystore" value="" />
+        <property name="keypassword" value="" />
+        <property name="storepassword" value="" />
+        <property name="supportedDevices" value="universal" />
+        <property name="installLocation" value="internalOnly" />
+        <property name="permission" value="" />
+      </publishProperties>
+      <includes>
+        <fonts>
+          <string>freesans-r.ttf</string>
+        </fonts>
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="300">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="codeSigningIdentity" value="iPhone Developer: Jozef Pridavok (ENR9MZF3YM)" />
+        <property name="supportedDevices" value="universal" />
+        <property name="iPhone4-icon" value="" />
+        <property name="iPhone4-splash" value="" />
+        <property name="iPhone5-icon" value="" />
+        <property name="iPhone5-splash" value="" />
+        <property name="iPad-icon" value="" />
+        <property name="iPad-splash" value="" />
+        <property name="newiPad-icon" value="" />
+        <property name="newiPad-splash" value="" />
+        <property name="bundleIdentifier" value="com.generatedbymoscrifide.deviceorientation" />
+      </publishProperties>
+      <includes>
+        <fonts>
+          <string>freesans-r.ttf</string>
+        </fonts>
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="200">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="manifest" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="201">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="manifest" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="450">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="applicationId" value="" />
+        <property name="certificate" value="" />
+        <property name="key" value="" />
+        <property name="password" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin />
+      </includes>
+    </device>
+    <device targetPlatform="520">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin />
+      </includes>
+    </device>
+    <device targetPlatform="203">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+        <property name="manifest" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="600">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+    <device targetPlatform="700">
+      <publishProperties>
+        <property name="icon" value="" />
+        <property name="splash" value="" />
+      </publishProperties>
+      <includes>
+        <fonts />
+        <skin name="" theme="" />
+      </includes>
+    </device>
+  </devices>
+</Project>
