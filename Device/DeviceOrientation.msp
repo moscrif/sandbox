@@ -47,7 +47,7 @@
       <publishProperties>
         <property name="icon" value="" />
         <property name="splash" value="" />
-        <property name="codeSigningIdentity" value="iPhone Developer: Jozef Pridavok (ENR9MZF3YM)" />
+        <property name="codeSigningIdentity" value="iPhone Developer: Jozef Pridavok (6KCC35DH5Y)" />
         <property name="supportedDevices" value="universal" />
         <property name="iPhone4-icon" value="" />
         <property name="iPhone4-splash" value="" />
