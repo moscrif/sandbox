@@ -55,7 +55,7 @@
         <fonts>
           <string>freesans-r.ttf</string>
         </fonts>
-        <skin name="moscrif" theme="default" />
+        <skin name="" theme="" />
       </includes>
     </device>
     <device targetPlatform="200">
