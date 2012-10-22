@@ -3,6 +3,8 @@ include "lib://game2d/game.ms"
 include "lib://game2d/layer.ms"
 include "lib://game2d/label.ms"
 include "lib://game2d/textButton.ms"
+include "lib://game2d/sceneTransitions/slideToTop.ms"
+include "lib://game2d/sceneTransitions/slideToBottom.ms"
 
 class GameMenu : Layer
 {
@@ -10,25 +12,20 @@ class GameMenu : Layer
     {
         super.init();
 
-        if (Facebook.isAvailable())
-            logI("Facebook.isAvailable true");
-        else
-            logI("Facebook.isAvailable false");
         this._facebook = new Facebook("", ["offline_access", "status_update", "read_stream", "publish_stream"]);
-
-        var _paint = new Paint();
-//      _paint.typeface = Typeface.fromName("freemono-r");
-        _paint.color = 0xBF00003F;
-        _paint.textSize = 48;
-        _paint.textAlign = #left;
-        _paint.style = #fill;
+        this._paint = new Paint();
+//      this._paint.typeface = Typeface.fromName("freemono-r");
+        this._paint.color = 0xBF00003F;
+        this._paint.textSize = 48;
+        this._paint.textAlign = #left;
+        this._paint.style = #fill;
 
         logI("this.width", this._width, "this.height", this._height);
         this._labelTest = new Label({
             text     : "FaceBook",
             x        : System.width / 2,
             y        : System.height / 15,
-            paint    : _paint/*,
+            paint    : this._paint/*,
             color    : 0xBF1F1F4F,
             textSize : 48*/
         });
@@ -40,19 +37,19 @@ class GameMenu : Layer
         }
         this.add(this._labelTest);
 
-        this.fromValue = function(value)
+        this._fromValue = function(value)
         {
             var result = "";
             switch (typeof(value)) {
             case #array:
                 result += "[";
                 for (var i = 0; i < value.length; i++)
-                    result += app.fromValue(value[i]) + ", ";
+                    result += this super._fromValue(value[i]) + ", ";
                 result = result.substring(0, result.length - 2) + "]";
                 break;
             case #object:
                 for (var item in value)/* {*/
-                    result = item + " = " + this.fromValue(value.propertyAt(item)) + ", " + result;
+                    result = item + " = " + this super._fromValue(value.propertyAt(item)) + ", " + result;
 /*                  if (item == "url")
                         if (value.propertyAt(item).substring(value.propertyAt(item).length - 4, value.propertyAt(item).length) == ".jpg" ||
                             value.propertyAt(item).substring(value.propertyAt(item).length - 4, value.propertyAt(item).length) == ".png" ||
@@ -70,35 +67,94 @@ class GameMenu : Layer
             return result;
         }
 
-        this.sceneResult = function(value)
+        this._login = false;
+        this._facebook.onLogin = function()
         {
-            var formRes = new Form({name: "formRes"});
-            formRes.onActivate = function(sender)
-            {
-                ;//logI("formRes");
+            logI("onLogin Login");
+            this super._login = true;
+            this super._buttonLoginLogout.setText("Logout");
+            this super._labelTest.setText("Facebook LoggedIn");
+        }
+        this._facebook.onLoginFailed = function(status)
+        {
+            logI("onLoginFailed : ", status.debugShow(), typeof(status), "\n", this super._fromValue(status));
+            this super._sceneResult("onLoginFailed :", this super._fromValue(status));
+            this super._login = false;
+            this super._buttonLoginLogout.setText("Login");
+            this super._labelTest.setText("Facebook LoggedOut");
+        }
+        this._facebook.onLogout = function()
+        {
+            logI("onLogout Logout");
+            this super._login = false;
+            this super._buttonLoginLogout.setText("Login");
+            this super._labelTest.setText("Facebook LoggedOut");
+        }
+        this._facebook.onLogoutFailed = function(status)
+        {
+            logI("onLogoutFailed : ", status.debugShow(), typeof(status), "\n", this super._fromValue(status));
+            this super._sceneResult("onLogoutFailed :", this super._fromValue(status));
+            this super._login = false;
+            this super._buttonLoginLogout.setText("Login");
+            this super._labelTest.setText("Facebook LoggedOut");
+        }
+        this._buttonLoginLogout = new TextButton({
+            text   : "Login",
+            x      : System.width / 2,
+            y      : System.height / 15 * 2,
+            paint  : this._paint
+        });
+        this._buttonLoginLogout.onClick = function()
+        {
+            if (this super._login) {
+                logI("Logout");
+                this super._facebook.logout();
+            } else {
+                logI("Login");
+                this super._facebook.login();
             }
-    
-            var toolsRes = new ToolBar({height: 100});
-            formRes.add(toolsRes);
-            toolsRes.add(new ToolBarButton({icon: #quit, text: "quit", onClick: function(sender) { app.pop(formRes); formRes.detach(); }}));
-    
-            formRes.onDraw = function(sender, canvas)
-            {
-                if (value)
-                    switch (typeof(value)) {
-                    case #Bitmap:
-                        canvas.drawBitmap(value, (System.width - value.width) / 2 , (System.height - 100 - value.height) / 2, app._paint);
-                        break;
-                    default:
-                        canvas.drawTextBox(value, 0, 100, System.width, System.height, app._paint);
-                    }
-                else
-                    canvas.clear(0xFF000000);
-            }
-            app.push(formRes);
+//          this super._addRotateScene();
+//          Game.instance.push(new RotateScene(), new SlideToTop());
+        }
+        this._buttonLoginLogout.setText = function(v)
+        {
+            var oldWidth = this.width;
+            this.text = v;
+            this.x = this.x - (this.width - oldWidth) / 2;
+        }
+        this.add(this._buttonLoginLogout);
+
+        this._sceneResult = function(text, value)
+        {
+            if (value) {
+                this._resultScene = new ResultScene();
+                this._resultScene._labelTest.setText(text);
+                this._resultScene.draw = function(canvas)
+                {
+                    this._paint = new Paint();
+                    this._paint.color = this super._paint.color;
+                    this._paint.textSize = 20;
+                    this._paint.textAlign = this super._paint.textAlign;
+                    this._paint.style = this super._paint.style;
+                    super.draw(canvas);
+                    if (value)
+                        switch (typeof(value)) {
+                        case #Bitmap:
+                            logI("resultScene.Draw", text, value);
+                            canvas.drawBitmap(value, (System.width - value.width) / 2 , (System.height - 100 - value.height) / 2, this._paint);
+                            break;
+                        default:
+                            canvas.drawTextBox(value, 5, Math.ceil(System.height / 25 * 1.2), System.width - 10, Math.ceil(System.height / 25 * 24.2), this._paint);
+                        }
+                    else
+                        canvas.clear(0xBF00003F);
+                }
+                MyGame.instance.push(this._resultScene, new SlideToTop());
+            } else
+                logI("_sceneResult(null)");
         }
     
-        this.Bitmap_FromUrl = function(url)
+        this._bitmapFromUrl = function(url)
         {
             var wc = new WebClient();
             // show error message if some error appeared
@@ -120,11 +176,11 @@ class GameMenu : Layer
                 switch (typeof(bitmap)) {
                 case #Bitmap:
                     logI("WebClient.onReceived : #Bitmap : ", typeof(bitmap), bitmap);
-                    app.formResult(bitmap);
+                    this super._sceneResult("WebClient.onReceived : #Bitmap :", bitmap);
                     break;
                 default:
                     logI("WebClient.onReceived : Default : ", typeof(bitmap), bitmap);
-                    app.formResult("WebClient.onReceived : Default : ", typeof(bitmap), app.fromValue(bitmap));
+                    this super._sceneResult("WebClient.onReceived : Default :", typeof(bitmap) + ' ' + this super._fromValue(bitmap));
                 }
             }
             wc.onCancel = function(sender)
@@ -143,74 +199,52 @@ class GameMenu : Layer
                 wc.getData(url.substring(url.substring(8, url.length).indexOf("/") + 8, url.length));
             }
         }
-
-        this._login = false;
-        this._facebook.onLogin = function()
+        this._facebook.onRequest = function(result)
         {
-            logI("onLogin Login");
-            this._login = true;
-            this._buttonLoginLogout.setText("Logout");
-            this._labelTest.setText("Facebook LoggedIn");
+            logI("onRequest : ", result.debugShow(), typeof(result), "\n", this super._fromValue(result));
+            var bmp = false;
+/*          if (typeof(result) == #object)
+                for (var item1 in result)
+                    if (item1 == "picture")
+                        if (typeof(result.propertyAt(item1)) == #object)
+                            for (var item2 in result.propertyAt(item1))
+                                if (item2 == "data")
+                                    if (typeof(result.propertyAt(item1).propertyAt(item2)) == #object)
+                                        for (var item3 in result.propertyAt(item1).propertyAt(item2))
+                                            if (item3 == "url") {
+                                                this super._bitmapFromUrl(result.propertyAt(item1).propertyAt(item2).propertyAt(item3));
+                                                bmp = true;
+                                            }*/
+            if (typeof(result) == #object)
+                for (var item1 in result)
+                    if (item1 == "data")
+                        if (typeof(result.propertyAt(item1)) == #object)
+                            for (var item2 in result.propertyAt(item1))
+                                if (item2 == "url") {
+                                    this super._bitmapFromUrl(result.propertyAt(item1).propertyAt(item2));
+                                    bmp = true;
+                                }
+            if (!bmp)
+                this super._sceneResult("onRequest :", this super._fromValue(result));
         }
-        this._facebook.onLoginFailed = function(status)
+        this._facebook.onRequestFailed = function(error)
         {
-            logI("onLoginFailed : ", status.debugShow(), typeof(status), "\n", this.fromValue(status));
-            this.sceneResult("onLoginFailed : " + this.fromValue(status));
-            this._login = false;
-            this._buttonLoginLogout.setText("Login");
-            this._labelTest.setText("Facebook LoggedOut");
+            logI("onRequestFailed : ", error.debugShow(), typeof(error), "\n", this super._fromValue(error));
+            this super._sceneResult("onRequestFailed :", this super._fromValue(error));
         }
-        this._facebook.onLogout = function()
-        {
-            logI("onLogout Logout");
-            this._login = false;
-            this._buttonLoginLogout.setText("Login");
-            this._labelTest.setText("Facebook LoggedOut");
-        }
-        this._facebook.onLogoutFailed = function(status)
-        {
-            logI("onLogoutFailed : ", status.debugShow(), typeof(status), "\n", app.fromValue(status));
-            this.sceneResult("onLogoutFailed : " + this.fromValue(status));
-            this._login = false;
-            this._buttonLoginLogout.setText("Login");
-            this._labelTest.setText("Facebook LoggedOut");
-        }
-        this._buttonLoginLogout = new TextButton({
-            text   : "Login",
-            x      : System.width / 2,
-            y      : System.height / 15 * 2,
-            paint  : _paint
-        });
-        this._buttonLoginLogout.onClick = function()
-        {
-            if (this.login) {
-                logI("Logout");
-                this._facebook.logout();
-            } else {
-                logI("Login");
-                this._facebook.login();
-            }
-//          this super._addRotateScene();
-//          Game.instance.push(new RotateScene(), new SlideToTop());
-        }
-        this._buttonLoginLogout.setText = function(v)
-        {
-            var oldWidth = this.width;
-            this.text = v;
-            this.x = this.x - (this.width - oldWidth) / 2;
-        }
-        this.add(this._buttonLoginLogout);
-
         this._buttonRequestGetMe = new TextButton({
             text   : "Request Get (me)",
             x      : System.width / 2,
             y      : System.height / 15 * 3,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestGetMe.onClick = function()
         {
             logI("Request Get (me)");
-//          app.login ? _facebook.request("me") : this.sceneResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.request("me");
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestGetMe);
 
@@ -218,12 +252,15 @@ class GameMenu : Layer
             text   : "Request Get (me/friends)",
             x      : System.width / 2,
             y      : System.height / 15 * 4,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestGetMeFriends.onClick = function()
         {
             logI("Request Get (me/friends)");
-//          app.login ? _facebook.request("me/friends", #get) : this.sceneResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.request("me/friends", #get);
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestGetMeFriends);
 
@@ -231,12 +268,15 @@ class GameMenu : Layer
             text   : "Request Get (me/picture)",
             x      : System.width / 2,
             y      : System.height / 15 * 5,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestGetMePicture.onClick = function()
         {
             logI("Request Get (me/picture)");
-//          app.login ? _facebook.request("me/picture", #get, {redirect: false, type: "large"}) : this.sceneResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.request("me/picture", #get, {redirect: false, type: "large"});
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestGetMePicture);
 
@@ -244,12 +284,15 @@ class GameMenu : Layer
             text   : "Request Post (feed status)",
             x      : System.width / 2,
             y      : System.height / 15 * 6,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestPostStatus.onClick = function()
         {
             logI("Request Post (feed status)");
-//          app.login ? _facebook.request("me/feed", #post, {title: "Moscrif Test", type: "status", message: "Moscrif Test.", description: "Moscrif test."}) : this.sceneResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.request("me/feed", #post, {title: "Moscrif Test", type: "status", message: "Moscrif Test.", description: "Moscrif test."});
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestPostStatus);
 
@@ -257,12 +300,15 @@ class GameMenu : Layer
             text   : "Request Post (feed link)",
             x      : System.width / 2,
             y      : System.height / 15 * 7,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestPostLink.onClick = function()
         {
             logI("Request Post (feed link)");
-//          app.login ? _facebook.request("me/feed", #post, {title: "Moscrif Test", type: "link", link: "http://moscrif.com", picture: "http://moscrif.com/images/logo.png", description: "Moscrif test."}) : this.sceneResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.request("me/feed", #post, {title: "Moscrif Test", type: "link", link: "http://moscrif.com", picture: "http://moscrif.com/images/logo.png", description: "Moscrif test."});
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestPostLink);
 
@@ -271,35 +317,41 @@ class GameMenu : Layer
             text   : "Request Post (photo)",
             x      : System.width / 2,
             y      : System.height / 15 * 8,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestPostPhoto.onClick = function()
         {
             logI("Request Post (photo)");
-//          app.login ? _facebook.request("me/photos", #post, {title: "Moscrif Test", source: app.bitmap, message: "Moscrif Test.", description: "Moscrif test."}) : this.sceneResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.request("me/photos", #post, {title: "Moscrif Test", source: this super.bitmap, message: "Moscrif Test.", description: "Moscrif test."});
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestPostPhoto);
-/*
+
         this._facebook.onDialog = function(result)
         {
-            logI("onDialog : ", result.debugShow(), typeof(result), "\n", this.fromValue(result));
-            this.sceneResult("onDialog : " + this.fromValue(result));
+            logI("onDialog : ", typeof(result) == #string ? result : result.debugShow(), typeof(result), "\n", this super._fromValue(result));
+            this super._sceneResult("onDialog :", this super._fromValue(result));
         }
         this._facebook.onDialogFailed = function(error)
         {
-            logI("onDialogFailed : ", error.debugShow(), typeof(error), "\n", this.fromValue(error));
-            this.sceneResult("onDialogFailed : " + this.fromValue(error));
-        }*/
+            logI("onDialogFailed : ", typeof(error) == #string ? error : error.debugShow(), typeof(error), "\n", this super._fromValue(error));
+            this super._sceneResult("onDialogFailed :", this super._fromValue(error));
+        }
         this._buttonRequestView = new TextButton({
             text   : "Request View (feed)",
             x      : System.width / 2,
             y      : System.height / 15 * 9,
-            paint  : _paint
+            paint  : this._paint
         });
         this._buttonRequestView.onClick = function()
         {
             logI("Request View (feed)");
-//          app.login ? _facebook.dialog("feed", {caption: "Moscrif Test.", link: "http://moscrif.com", picture: "http://moscrif.com/images/logo.png", actions: {name: "Moscrif Test", link: "http://moscrif.com"}, description: "Moscrif test."}) : app.formResult("LooggedOut");
+            if (this super._login)
+                this super._facebook.dialog("feed", {caption: "Moscrif Test.", link: "http://moscrif.com", picture: "http://moscrif.com/images/logo.png", actions: {name: "Moscrif Test", link: "http://moscrif.com"}, description: "Moscrif test."});
+            else
+                this super._sceneResult("LooggedOut", "onRequest : LooggedOut");
         }
         this.add(this._buttonRequestView);
 
@@ -308,8 +360,8 @@ class GameMenu : Layer
             this._buttonQuit = new TextButton({
                 text   : "Quit",
                 x      : System.width / 2,
-                y      : System.height / 15 * 14,
-                paint  : _paint
+                y      : System.height / 15 * 14.5,
+                paint  : this._paint
             });
             this._buttonQuit.onClick = function()
             {
@@ -352,8 +404,8 @@ class GameMenu : Layer
         get return this._height;
         set this._height = v;
     }
-*/
-/*    function draw(canvas)
+
+    function draw(canvas)
     {
 /*      canvas.save();
         canvas.translate(this.x, this.y);
@@ -376,13 +428,74 @@ class GameScene : Scene
             height     : System.height - 10
         });
         this.add(this._menu);
-      this._menu._visible = true;
+//      this._menu._visible = true;
     }
 
-    function draw(canvas)
+/*  function draw(canvas)
     {
         super.draw(canvas);
+    }*/
+}
+
+class ResultScene : Scene
+{
+    function init()
+    {
+        super.init();
+        this._paint = new Paint();
+//      this._paint.typeface = Typeface.fromName("freemono-r");
+        this._paint.color = 0xBF00003F;
+        this._paint.textSize = 36;
+        this._paint.textAlign = #left;
+        this._paint.style = #fill;
+
+        this._labelTest = new Label({
+            text     : "FaceBook",
+            x        : System.width / 2,
+            y        : System.height / 25 * 0.9,
+            paint    : this._paint/*,
+            color    : 0xBF1F1F4F,
+            textSize : 48*/
+        });
+        this._labelTest.setText = function(v)
+        {
+            var oldWidth = this.width;
+            this.text = v;
+            this.x = this.x - (this.width - oldWidth) / 2;
+        }
+        this.add(this._labelTest);
+
+        this._buttonBack = new TextButton({
+            text   : "Back",
+            x      : System.width / 2,
+            y      : System.height / 25 * 24.7,
+            paint  : this._paint
+        });
+        this._buttonBack.onClick = function()
+        {
+            logI("Back");
+            this super._goBack();
+        }
+        this.add(this._buttonBack);
     }
+
+    function _goBack()
+    {
+        MyGame.instance.pop(new SlideToBottom());
+    }
+
+/*  function draw(canvas)
+    {
+        canvas.save();
+        canvas.translate(this.x, this.y);
+        canvas.restore();*-/
+        super.draw(canvas);
+    }
+
+    function exit()
+    {
+        ;
+    }*/
 }
 
 class MyGame : Game
@@ -390,7 +503,6 @@ class MyGame : Game
     function start()
     {
         this._bg = Bitmap.fromFile("app://game_back.png");
-//        this._facebook = new Facebook("", ["offline_access", "status_update", "read_stream", "publish_stream"]);
 
         this._game = new GameScene();
         this.push(this._game);
@@ -403,8 +515,10 @@ class MyGame : Game
 
     function onKeyPressed(keyCode)
     {
-        if (keyCode == #back || keyCode == #home)
-            game.quit();
+        if (keyCode == #back || keyCode == #home) {
+            logI("Quit");
+            MyGame.quit();
+        }
     }
 
     function draw(canvas)
