@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)\output" facebookAppID="" projectArtefact="GameCenter" appFile="./GameCenter.app">
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="game" projectOutput="$(workspace_dir)\output" facebookAppID="" projectArtefact="FaceBook_$(Platform)_$(Resolution)" appFile="./GameCenter.app">
   <conditionDefines />
   <NewSkin>true</NewSkin>
   <fileProperties />
@@ -16,7 +16,9 @@
         <property name="permission" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -33,7 +35,9 @@
         <property name="permission" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -53,7 +57,7 @@
       </publishProperties>
       <includes>
         <fonts>
-          <string>freesans-r.ttf</string>
+          <string>UbuntuMono-B.ttf</string>
         </fonts>
         <skin name="" theme="" />
       </includes>
@@ -65,7 +69,9 @@
         <property name="manifest" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -76,7 +82,9 @@
         <property name="manifest" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -90,7 +98,9 @@
         <property name="password" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -100,7 +110,9 @@
         <property name="splash" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -111,7 +123,9 @@
         <property name="manifest" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -121,7 +135,9 @@
         <property name="splash" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -131,7 +147,9 @@
         <property name="splash" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freemono-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
