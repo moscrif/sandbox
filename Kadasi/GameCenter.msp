@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="game" projectOutput="$(workspace_dir)\output" facebookAppID="" projectArtefact="FaceBook_$(Platform)_$(Resolution)" appFile="./GameCenter.app">
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="game" projectOutput="$(workspace_dir)\output" facebookAppID="" projectArtefact="GameCenter_$(Platform)_$(Resolution)" appFile="./GameCenter.app">
   <conditionDefines />
   <NewSkin>true</NewSkin>
   <fileProperties />
