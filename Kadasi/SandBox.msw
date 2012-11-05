@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" vertBodyHeight="830" horzMiddleBodyHeight="200" vertOutputWidth="960" name="SandBox" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/Kado/Work/Moscrif.Sandbox/Kadasi/DeviceOrientation.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_dvga.ini" selectedDevices="300">
+<Workspace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" vertBodyHeight="830" horzMiddleBodyHeight="200" vertOutputWidth="960" name="SandBox" outputDir="$(workspace_dir)/output" tag="0" signapp="false" showLeftPane="true" showRightPane="true" showBottomPane="true" selectedProject="/Users/Kado/Work/Moscrif.Sandbox/Kadasi/GameDraftWithTextView.msp" showalllibs="false" selectedResolution="/Applications/MoscrifIDE.app/Contents/Resources/cfg/displays/noskin_dvga.ini" selectedDevices="100">
   <projects>
     <project>./GameDraftWithTextView.msp</project>
     <project>./GameCenter.msp</project>
@@ -10,6 +10,6 @@
   </projects>
   <opened>
     <file>StartPage</file>
-    <file>/Users/Kado/Work/Moscrif.Sandbox/Kadasi/DeviceOrientation/main.ms</file>
+    <file>/Users/Kado/Work/Moscrif.Sandbox/Device/DeviceOrientation/main.ms</file>
   </opened>
 </Workspace>

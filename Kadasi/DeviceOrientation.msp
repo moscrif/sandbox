@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)/output" facebookAppID="" projectArtefact="DeviceOrientation_$(Platform)_$(Resolution)" appFile="./DeviceOrientation.app">
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)/output" facebookAppID="" projectArtefact="DeviceOrientation_$(Platform)_$(Resolution)" appFile="../Device/DeviceOrientation.app">
   <conditionDefines />
   <NewSkin>true</NewSkin>
-  <fileProperties>
-    <property path="./DeviceOrientation/main.ms" isDirectory="false" excluded="false">
-      <conditions />
-    </property>
-  </fileProperties>
+  <fileProperties />
   <devices>
     <device targetPlatform="100">
       <publishProperties>
@@ -21,7 +17,9 @@
         <property name="permission" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freesans-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -39,7 +37,9 @@
         <property name="permission" value="" />
       </publishProperties>
       <includes>
-        <fonts />
+        <fonts>
+          <string>freesans-r.ttf</string>
+        </fonts>
         <skin name="" theme="" />
       </includes>
     </device>
@@ -58,16 +58,10 @@
         <property name="newiPad-icon" value="" />
         <property name="newiPad-splash" value="" />
         <property name="bundleIdentifier" value="com.generatedbymoscrifide.deviceorientation" />
-        <property name="icon3gs" value="" />
-        <property name="icon4+" value="" />
-        <property name="iconTablet" value="" />
-        <property name="splash3gs" value="" />
-        <property name="splash4+" value="" />
-        <property name="splashTablet" value="" />
       </publishProperties>
       <includes>
         <fonts>
-          <string>SegoeWP-Black.ttf</string>
+          <string>freesans-r.ttf</string>
         </fonts>
         <skin name="" theme="" />
       </includes>

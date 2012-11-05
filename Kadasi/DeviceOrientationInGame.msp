@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)/output" facebookAppID="" projectArtefact="DeviceOrientationInGame_$(Platform)_$(Resolution)" appFile="./DeviceOrientationInGame.app">
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" includeAllResolution="false" applicationType="application" projectOutput="$(workspace_dir)/output" facebookAppID="" projectArtefact="DeviceOrientationInGame_$(Platform)_$(Resolution)" appFile="../Device/DeviceOrientationInGame.app">
   <conditionDefines />
   <NewSkin>true</NewSkin>
   <fileProperties />
@@ -58,12 +58,6 @@
         <property name="newiPad-icon" value="" />
         <property name="newiPad-splash" value="" />
         <property name="bundleIdentifier" value="com.generatedbymoscrifide.deviceorientationingame" />
-        <property name="icon3gs" value="" />
-        <property name="icon4+" value="" />
-        <property name="iconTablet" value="" />
-        <property name="splash3gs" value="" />
-        <property name="splash4+" value="" />
-        <property name="splashTablet" value="" />
       </publishProperties>
       <includes>
         <fonts>
